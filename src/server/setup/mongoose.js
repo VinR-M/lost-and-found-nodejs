@@ -1,11 +1,17 @@
+/* eslint-disable global-require */
+/* eslint-disable no-use-before-define */
+/* eslint-disable strict */
 /**
 * Setup MongoDB.
 */
+
 'use strict';
 
-let mongoose = require('mongoose');
-const DATABASE_URL = 'mongodb://127.0.0.1:27017/AirportAI';
+const mongoose = require('mongoose');
 
+const DATABASE_URL = (process.env.NODE_ENV === 'test')
+  ? 'mongodb://127.0.0.1:27017/AirportAI-test'
+  : 'mongodb://127.0.0.1:27017/AirportAI';
 
 module.exports = setup;
 
@@ -13,42 +19,37 @@ module.exports = setup;
 * Sets up MongoDB connection.
 */
 function setup() {
-
-  mongoose.connection.on('connected', function () {
+  mongoose.connection.on('connected', () => {
     console.log('MongoDB connected to database.');
   });
-  mongoose.connection.on('open', function () {
+  mongoose.connection.on('open', () => {
     console.log('MongoDB connection opened!');
   });
-  mongoose.connection.on('error', function () {
+  mongoose.connection.on('error', () => {
     console.error('MongoDB connection error! Disconnecting...');
     mongoose.disconnect();
   });
-  mongoose.connection.on('disconnected', function () {
+  mongoose.connection.on('disconnected', () => {
     console.error('MongoDB disconnected! Attempting to reconnect...');
     connectToDb();
   });
-  mongoose.connection.on('reconnected', function () {
+  mongoose.connection.on('reconnected', () => {
     console.log('MongoDB reconnected!');
   });
-  mongoose.connection.on('close', function () {
+  mongoose.connection.on('close', () => {
     console.error('MongoDB closed!');
   });
 
-  return connectToDb().then(function() {
-
+  return connectToDb().then(() => {
     // Set up all models.
-    require('../models');
-    return;
+    require('../../infra/models');
   });
-};
-
+}
 
 /**
 * Connects to the database.
 */
 function connectToDb() {
-
   // Use native promises.
   mongoose.Promise = global.Promise;
 
@@ -67,8 +68,8 @@ function connectToDb() {
   };
 
   // Connect and return promise.
-  return mongoose.connect(DATABASE_URL, mongoConnectOpts).catch(function(err) {
+  return mongoose.connect(DATABASE_URL, mongoConnectOpts).catch((err) => {
     // To avoid promise not handled exception.
-    console.error('Unable to connect MongoDB. If problem persists, please restart the server. Error: ' + err);
+    console.error(`Unable to connect MongoDB. If problem persists, please restart the server. Error: ${err}`);
   });
 }

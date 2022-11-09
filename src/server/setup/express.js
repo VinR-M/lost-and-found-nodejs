@@ -1,11 +1,14 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable strict */
 /**
 * Setup Express app.
 */
+
 'use strict';
 
-let helmet = require('helmet');
-let methodOverride = require('method-override');
-let express = require('express');
+const helmet = require('helmet');
+const methodOverride = require('method-override');
+const express = require('express');
 
 module.exports = setup;
 
@@ -21,4 +24,4 @@ function setup(app) {
   app.use(express.json());
 
   return app;
-};
+}
