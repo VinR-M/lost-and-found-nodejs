@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { describe, it } = require('mocha');
 const { mockProductList } = require('../../utils/mocks');
-const AddProductController = require('./ListProductsController');
+const ListProductsController = require('./ListProductsController');
 
 class ListProductsUseCaseStub {
   async execute() {
@@ -11,7 +11,7 @@ class ListProductsUseCaseStub {
 
 const listProductsUseCase = new ListProductsUseCaseStub();
 
-const sut = new AddProductController(listProductsUseCase);
+const sut = new ListProductsController(listProductsUseCase);
 
 describe('List Products Controller', () => {
   it('should return list of Products', async () => {

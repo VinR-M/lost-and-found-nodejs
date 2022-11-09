@@ -18,4 +18,5 @@ describe('List Products Use Case', () => {
     const result = await sut.execute();
     expect(result).to.equal(mockProductList);
   });
+  // Error tests
 });

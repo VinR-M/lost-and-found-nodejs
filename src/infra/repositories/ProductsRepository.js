@@ -14,6 +14,11 @@ class ProductsRepository {
     const list = await this.product.find();
     return list;
   }
+
+  async delete(id) {
+    await this.product.deleteOne({ _id: id });
+    return true;
+  }
 }
 
 module.exports = ProductsRepository;

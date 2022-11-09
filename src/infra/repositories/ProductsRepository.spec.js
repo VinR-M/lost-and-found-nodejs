@@ -2,6 +2,8 @@ const { expect } = require('chai');
 const {
   describe, it, before, beforeEach,
 } = require('mocha');
+const mongoose = require('mongoose');
+
 const { Product } = require('../models');
 const ProductsRepository = require('./ProductsRepository');
 
@@ -19,7 +21,10 @@ beforeEach(async () => {
 // runs once after the last test in this block
 // });
 
+const mongoId = new mongoose.mongo.ObjectId('56cb91bdc3464f14678934ca');
+
 const mockProduct = {
+  _id: mongoId,
   productName: 'any_name',
 };
 
@@ -40,5 +45,12 @@ describe('Products Repository', () => {
     addProduct();
     const list = await sut.list();
     expect(list.length).to.equal(1);
+  });
+
+  it('Should delete Product from Database', async () => {
+    addProduct();
+    await sut.delete(mongoId);
+    const databaseData = await product.find();
+    expect(databaseData.length).to.equal(0);
   });
 });

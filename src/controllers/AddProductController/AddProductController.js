@@ -16,7 +16,7 @@ class AddProductController {
       return response;
     } catch (error) {
       return {
-        statusCode: 403,
+        statusCode: 500,
         ok: false,
         message: error.message || 'Failed to add Product.',
       };

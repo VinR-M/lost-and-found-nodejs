@@ -1,23 +1,23 @@
 const { assert } = require('chai');
 const { describe, it } = require('mocha');
-const AddProductUseCase = require('./AddProductUseCase');
+const DeleteProductUseCase = require('./DeleteProductUseCase');
 
 const mockProduct = {
-  name: 'any_name',
+  id: 'any_id',
 };
 
 class ProductsRepositoryStub {
-  async add() {
+  async delete() {
     return Promise.resolve(true);
   }
 }
 
 const productsRepository = new ProductsRepositoryStub();
 
-const sut = new AddProductUseCase(productsRepository);
+const sut = new DeleteProductUseCase(productsRepository);
 
-describe('Add Product Use Case', () => {
-  it('should return true if product is added', async () => {
+describe('Delete Product Use Case', () => {
+  it('should return true if product is deleted', async () => {
     const result = await sut.execute(mockProduct);
     assert.isTrue(result);
   });
