@@ -23,6 +23,10 @@ const mockProduct = {
   productName: 'any_name',
 };
 
+const addProduct = async () => {
+  await product.create(mockProduct);
+};
+
 const sut = new ProductsRepository(product);
 
 describe('Products Repository', () => {
@@ -30,5 +34,11 @@ describe('Products Repository', () => {
     await sut.add(mockProduct);
     const databaseData = await product.find();
     expect(databaseData.length).to.equal(1);
+  });
+
+  it('Should list all Products from Database', async () => {
+    addProduct();
+    const list = await sut.list();
+    expect(list.length).to.equal(1);
   });
 });

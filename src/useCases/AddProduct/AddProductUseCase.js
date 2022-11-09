@@ -8,7 +8,7 @@ class AddProductUseCase {
   async execute(data) {
     const isAdded = await this.productsRepository.add(data);
 
-    if (!isAdded) { throw new Error('Failed to add User.'); }
+    if (!isAdded) { throw new Error('Failed to add Product.'); }
 
     return true;
   }

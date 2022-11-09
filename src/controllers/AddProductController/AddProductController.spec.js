@@ -4,9 +4,7 @@ const AddProductController = require('./AddProductController');
 
 const mockRequest = {
   body: {
-    productId: 'any_id',
     productName: 'any_name',
-    productCreatedAt: 'any_date',
   },
 };
 

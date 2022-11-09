@@ -9,6 +9,11 @@ class ProductsRepository {
     await this.product.create(data);
     return true;
   }
+
+  async list() {
+    const list = await this.product.find();
+    return list;
+  }
 }
 
 module.exports = ProductsRepository;

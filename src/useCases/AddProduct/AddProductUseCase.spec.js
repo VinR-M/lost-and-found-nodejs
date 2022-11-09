@@ -3,7 +3,6 @@ const { describe, it } = require('mocha');
 const AddProductUseCase = require('./AddProductUseCase');
 
 const mockProduct = {
-  id: 'any_id',
   name: 'any_name',
 };
 
