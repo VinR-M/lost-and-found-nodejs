@@ -9,6 +9,7 @@ const express = require('express');
 const { addProductController } = require('../../useCases/AddProduct');
 const { deleteProductController } = require('../../useCases/DeleteProduct');
 const { listProductsController } = require('../../useCases/ListProducts');
+const { searchProductsController } = require('../../useCases/SearchProducts');
 
 const router = express.Router();
 
@@ -24,7 +25,10 @@ router.delete('/deleteProduct', async (req, res) => {
   const response = await deleteProductController.handle(req);
   return res.status(response.statusCode).json(response.ok); // Change Response
 });
-// router.get('/searchProduct', (req, res) => searchProductController.handle(req, res));
+router.post('/searchProduct', async (req, res) => {
+  const response = await searchProductsController.handle(req);
+  return res.status(response.statusCode).json(response.body);
+});
 
 // router.post('/signin', (req, res) => signinController.handle(req, res));
 // router.post('/register', (req, res) => registerController.handle(req, res));

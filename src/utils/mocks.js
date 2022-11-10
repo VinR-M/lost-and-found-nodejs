@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 const mockProductList = {
   body: [
     {
@@ -11,4 +13,12 @@ const mockProductList = {
   ],
 };
 
-module.exports = { mockProductList };
+const mockSearch = {
+  searchTerm: 'any_name any_other_name',
+  date: moment().subtract(1, 'hour').format(),
+};
+const mockSearchWithoutDate = {
+  searchTerm: 'any_name any_other_name',
+};
+
+module.exports = { mockProductList, mockSearch, mockSearchWithoutDate };
