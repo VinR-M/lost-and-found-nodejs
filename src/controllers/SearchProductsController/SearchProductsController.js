@@ -1,12 +1,15 @@
 class SearchProductsController {
   constructor(
     SearchProductsUseCase,
+    Validate,
   ) {
     this.searchProductsUseCase = SearchProductsUseCase;
+    this.validate = Validate;
   }
 
   async handle(req) {
     try {
+      this.validate.searchRequest(req);
       const data = await this.searchProductsUseCase.execute(req.body);
       const response = {
         statusCode: 200,

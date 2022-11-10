@@ -15,18 +15,26 @@ const router = express.Router();
 
 router.get('/listProducts', async (req, res) => {
   const response = await listProductsController.handle();
+
+  if (!response.ok) { return res.status(response.statusCode).send(response.message); }
   return res.status(response.statusCode).json(response.body);
 });
 router.post('/addProduct', async (req, res) => {
   const response = await addProductController.handle(req);
-  return res.status(response.statusCode).json(response.ok); // Change Response
+
+  if (!response.ok) { return res.status(response.statusCode).send(response.message); }
+  return res.status(response.statusCode).send('Product Added.');
 });
 router.delete('/deleteProduct', async (req, res) => {
   const response = await deleteProductController.handle(req);
-  return res.status(response.statusCode).json(response.ok); // Change Response
+
+  if (!response.ok) { return res.status(response.statusCode).send(response.message); }
+  return res.status(response.statusCode).send('Product Deleted.');
 });
 router.post('/searchProduct', async (req, res) => {
   const response = await searchProductsController.handle(req);
+
+  if (!response.ok) { return res.status(response.statusCode).send(response.message); }
   return res.status(response.statusCode).json(response.body);
 });
 

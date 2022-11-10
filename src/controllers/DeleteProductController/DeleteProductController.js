@@ -1,13 +1,17 @@
 class DeleteProductController {
   constructor(
     DeleteProductUseCase,
+    Validate,
   ) {
     this.deleteProductUseCase = DeleteProductUseCase;
+    this.validate = Validate;
   }
 
-  async handle(res) {
+  async handle(req) {
     try {
-      await this.deleteProductUseCase.execute(res.body);
+      this.validate.deleteRequest(req);
+
+      await this.deleteProductUseCase.execute(req.body);
       const response = {
         statusCode: 200,
         ok: true,
@@ -16,7 +20,7 @@ class DeleteProductController {
       return response;
     } catch (error) {
       return {
-        statusCode: 500,
+        statusCode: 400,
         ok: false,
         message: error.message || 'Failed to delete Product.',
       };
