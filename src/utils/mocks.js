@@ -3,22 +3,24 @@ const moment = require('moment');
 const mockProductList = {
   body: [
     {
-      productName: 'any_name',
-      createdAt: Date.now(),
+      type: 'any_type',
+      brand: 'any_brand',
+      foundAt: Date.now(),
     },
     {
-      productName: 'any_other_name',
-      createdAt: Date.now(),
+      type: 'any_other_type',
+      color: 'any_color',
+      foundAt: Date.now(),
     },
   ],
 };
 
 const mockSearch = {
-  searchTerm: 'any_name any_other_name',
+  searchTerm: 'any_type any_other_type',
   date: moment().subtract(1, 'hour').format(),
 };
 const mockSearchWithoutDate = {
-  searchTerm: 'any_name any_other_name',
+  searchTerm: 'any_type any_other_type',
 };
 
 module.exports = { mockProductList, mockSearch, mockSearchWithoutDate };

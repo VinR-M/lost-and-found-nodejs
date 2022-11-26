@@ -28,18 +28,18 @@ const mongoIdTwo = new mongoose.mongo.ObjectId('56cb91bdc3464f14678934cb');
 
 const mockProduct = {
   _id: mongoId,
-  productName: 'any_name',
+  type: 'any_type',
 };
 
 const mockTwoProducts = [
   {
     _id: mongoId,
-    productName: 'any_name',
-    createdAt: moment().subtract(3, 'hours').format(),
+    type: 'any_type',
+    foundAt: moment().subtract(3, 'hours').format(),
   },
   {
     _id: mongoIdTwo,
-    productName: 'any_other_name',
+    type: 'any_other_type',
   }];
 
 const addProduct = async () => {

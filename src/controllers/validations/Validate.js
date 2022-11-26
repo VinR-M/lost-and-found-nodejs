@@ -1,7 +1,7 @@
 class Validate {
   addRequest(req) {
-    if (!req?.body?.productName) throw new Error('Field productName is missing.');
-    if (req?.body?.productName?.length < 10) throw new Error('Field productName must have at least 10 characters.');
+    if (!req?.body?.type) throw new Error('Field type is missing.');
+    if (req?.body?.type?.length < 5) throw new Error('Field type must have at least 10 characters.');
   }
 
   deleteRequest(req) {

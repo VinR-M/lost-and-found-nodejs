@@ -22,16 +22,11 @@ class ProductsRepository {
   }
 
   async search({ searchTerm, date }) {
-    const termsArray = searchTerm.split(' ');
-    const termsLike = termsArray.map((term) => (
-      new RegExp(term, 'i')
-    ));
-
     const queryProduct = {
-      productName: { $in: termsLike },
+      $text: { $search: searchTerm },
     };
 
-    if (date) { queryProduct.createdAt = { $gt: date }; }
+    if (date) { queryProduct.foundAt = { $gt: date }; }
 
     const list = await this.product.find(queryProduct);
 

@@ -6,7 +6,7 @@ const AddProductController = require('./AddProductController');
 
 const mockRequest = {
   body: {
-    productName: 'any_name',
+    type: 'any_name',
   },
 };
 
